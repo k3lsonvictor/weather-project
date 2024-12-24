@@ -38,7 +38,7 @@ export default function VerticalLineChart({
 }: {
   height?: number | string;
   width?: number;
-  data: { data: { label: string; value: number; }[]; }[]
+  data: { data: { label: string; value: number | string; }[]; }[]
 }) {
 
   const getGradient = useCallback(
@@ -100,7 +100,7 @@ export default function VerticalLineChart({
     datasets: !data.length ? [] : data.map((item: {
       data: {
         label: string;
-        value: number;
+        value: number | string;
       }[]
     }, i: number) => (
       {

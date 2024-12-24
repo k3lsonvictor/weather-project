@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./styles/css/weather-icons-wind.min.css";
 import "./styles/css/weather-icons.min.css";
-import { PlatformStructure } from './components/Structure/PlatformStructure';
+import { PlatformStructure } from './components/Layout/Structure/PlatformStructure';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
