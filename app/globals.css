@@ -2,15 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Weather Icons';
+  src: url('./styles/font/weathericons-regular-webfont.eot');
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0E0F0F;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: white;
   }
 }
 

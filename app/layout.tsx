@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./styles/css/weather-icons-wind.min.css";
+import "./styles/css/weather-icons.min.css";
+import { PlatformStructure } from './components/Structure/PlatformStructure';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <PlatformStructure>
+          {children}
+        </PlatformStructure>
       </body>
     </html>
   );

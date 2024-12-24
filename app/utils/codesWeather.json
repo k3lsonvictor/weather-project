@@ -1,0 +1,190 @@
+{
+  "weatherCodes": [
+    {
+      "code": 0,
+      "description": "Clear sky",
+      "summary": "Ensolarado",
+      "icon": "day-sunny"
+    },
+    {
+      "code": 1,
+      "description": "Mainly clear",
+      "summary": "Céu principalmente limpo",
+      "icon": "day-sunny-overcast"
+    },
+    {
+      "code": 2,
+      "description": "Partly cloudy",
+      "summary": "Parcialmente nublado",
+      "icon": "day-cloudy"
+    },
+    {
+      "code": 3,
+      "description": "Overcast",
+      "summary": "Nublado",
+      "icon": "cloudy"
+    },
+    {
+      "code": 45,
+      "description": "Fog",
+      "summary": "Nebuloso",
+      "icon": "day-fog"
+    },
+    {
+      "code": 48,
+      "description": "Depositing rime fog",
+      "summary": "Névoa com acúmulo de geada",
+      "icon": "day-fog"
+    },
+    {
+      "code": 51,
+      "description": "Drizzle: Light intensity",
+      "summary": "Chuvisco leve",
+      "icon": "day-sleet"
+    },
+    {
+      "code": 53,
+      "description": "Drizzle: Moderate intensity",
+      "summary": "Chuvisco moderado",
+      "icon": "day-sleet"
+    },
+    {
+      "code": 55,
+      "description": "Drizzle: Dense intensity",
+      "summary": "Chuvisco forte",
+      "icon": "day-sleet"
+    },
+    {
+      "code": 56,
+      "description": "Freezing Drizzle: Light intensity",
+      "summary": "Chuvisco congelante leve",
+      "icon": "day-sleet"
+    },
+    {
+      "code": 57,
+      "description": "Freezing Drizzle: Dense intensity",
+      "summary": "Chuvisco congelante forte",
+      "icon": "day-sleet"
+    },
+    {
+      "code": 61,
+      "description": "Rain: Slight intensity",
+      "summary": "Chuva leve",
+      "icon": "day-rain"
+    },
+    {
+      "code": 63,
+      "description": "Rain: Moderate intensity",
+      "summary": "Chuva moderada",
+      "icon": "day-rain"
+    },
+    {
+      "code": 65,
+      "description": "Rain: Heavy intensity",
+      "summary": "Chuva forte",
+      "icon": "day-rain"
+    },
+    {
+      "code": 66,
+      "description": "Freezing Rain: Light intensity",
+      "summary": "Chuva congelante leve",
+      "icon": "day-rain"
+    },
+    {
+      "code": 67,
+      "description": "Freezing Rain: Heavy intensity",
+      "summary": "Chuva congelante forte",
+      "icon": "day-rain"
+    },
+    {
+      "code": 71,
+      "description": "Snow fall: Slight intensity",
+      "summary": "Neve leve",
+      "icon": "day-snow"
+    },
+    {
+      "code": 73,
+      "description": "Snow fall: Moderate intensity",
+      "summary": "Neve moderada",
+      "icon": "day-snow"
+    },
+    {
+      "code": 75,
+      "description": "Snow fall: Heavy intensity",
+      "summary": "Neve forte",
+      "icon": "day-snow"
+    },
+    {
+      "code": 77,
+      "description": "Snow grains",
+      "summary": "Grãos de neve",
+      "icon": "day-snow"
+    },
+    {
+      "code": 80,
+      "description": "Rain showers: Slight intensity",
+      "summary": "Chuva leve",
+      "icon": "day-showers"
+    },
+    {
+      "code": 81,
+      "description": "Rain showers: Moderate intensity",
+      "summary": "Chuva moderada",
+      "icon": "day-showers"
+    },
+    {
+      "code": 82,
+      "description": "Rain showers: Violent intensity",
+      "summary": "Chuva forte",
+      "icon": "day-showers"
+    },
+    {
+      "code": 83,
+      "description": "Snow showers: Slight intensity",
+      "summary": "Nevasca leve",
+      "icon": "day-snow"
+    },
+    {
+      "code": 84,
+      "description": "Snow showers: Moderate intensity",
+      "summary": "Nevasca moderada",
+      "icon": "day-snow"
+    },
+    {
+      "code": 85,
+      "description": "Snow showers: Slight intensity",
+      "summary": "Nevasca leve",
+      "icon": "day-snow"
+    },
+    {
+      "code": 86,
+      "description": "Snow showers: Heavy intensity",
+      "summary": "Nevasca forte",
+      "icon": "day-snow-thunderstorm"
+    },
+    {
+      "code": 88,
+      "description": "Hail showers: Slight intensity",
+      "summary": "Granizo leve",
+      "icon": "day-hail"
+    },
+    {
+      "code": 95,
+      "description": "Thunderstorm: Slight intensity",
+      "summary": "Trovoada leve",
+      "icon": "day-thunderstorm"
+    },
+    {
+      "code": 96,
+      "description": "Thunderstorm: Moderate intensity",
+      "summary": "Trovoada moderada",
+      "icon": "day-thunderstorm"
+    },
+    {
+      "code": 99,
+      "description": "Thunderstorm with slight and heavy hail",
+      "summary": "Trovoada com granizo",
+      "icon": "day-thunderstorm"
+    }
+  ]
+}
