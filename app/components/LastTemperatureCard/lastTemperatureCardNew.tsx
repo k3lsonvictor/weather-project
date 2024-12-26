@@ -15,9 +15,11 @@ interface LastTemperature {
 
 export const LastTemperatureCardNew = ({setLocality, lastTemperature, timezone}: {setLocality: (e:string | null) => void, lastTemperature: TemperatureData, timezone: string | null}) => {
   const allBrazilianCities = brazilianCities.estados.flatMap((estado) => estado.cidades).sort((a, b) => a.localeCompare(b, "pt-BR"));
+  const [selectedCity, setSelectedLocality] = useState<string | null>(null);
 
   const handleCitySelect = (selectedCity: { value: string; label: string }) => {
     setLocality(selectedCity.value);
+    setSelectedLocality(selectedCity.value);
   };
 
   const localities = [
@@ -81,7 +83,7 @@ export const LastTemperatureCardNew = ({setLocality, lastTemperature, timezone}:
           <MapPinIcon
             className="h-4 w-4 text-white"
           />
-          <div className="text-sm">{timezone}</div>
+          <div className="text-sm">{selectedCity ? selectedCity : timezone }</div>
         </div>
         <div className='flex gap-2'>
           <CalendarDaysIcon
