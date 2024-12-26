@@ -1,9 +1,11 @@
 "use client"
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { MapPinIcon, CalendarDaysIcon } from '@heroicons/react/16/solid';
 import weatherCode from '../../utils/codesWeather.json';
 import { AutoCompleteInputField } from '../Layout/Structure/autoCompleteInput';
-import { useWeatherData } from '@/app/hooks/useWeatherData';
+import { getLocality, LocalityResponse } from '@/app/api/callers/locality';
+import brazilianCities from '@/app/utils/estados-cidades.json';
+import useWeatherReducer, { TemperatureData } from '../Layout/Structure/generalReducer';
 
 interface LastTemperature {
   temperature: string;
@@ -11,15 +13,12 @@ interface LastTemperature {
   weatherCode: number | null;
 }
 
-export const LastTemperatureCardNew = ({lastTemperature, timezone}:{lastTemperature: LastTemperature, timezone: string | null}) => {
+export const LastTemperatureCardNew = ({setLocality, lastTemperature, timezone}: {setLocality: (e:string | null) => void, lastTemperature: TemperatureData, timezone: string | null}) => {
+  const allBrazilianCities = brazilianCities.estados.flatMap((estado) => estado.cidades).sort((a, b) => a.localeCompare(b, "pt-BR"));
 
-  console.log(timezone)
-
-  const [selectedLocality, setSelectedLocality] = useState<string | null>(null);
-
-  console.log(selectedLocality);
-
-  useWeatherData(0, 0, selectedLocality);
+  const handleCitySelect = (selectedCity: { value: string; label: string }) => {
+    setLocality(selectedCity.value);
+  };
 
   const localities = [
     "America/Sao_Paulo",
@@ -45,23 +44,28 @@ export const LastTemperatureCardNew = ({lastTemperature, timezone}:{lastTemperat
     <div className="
         bg-[#0C101D] rounded rounded-2xl h-auto w-full min-auto font-oswald font-semibold flex flex-col justify-center items-start p-6">
       <div>
-        <AutoCompleteInputField 
+        <AutoCompleteInputField
           value={""}
-          onSelect={(e) => {
-            setSelectedLocality(e.label);
-          }}
+          onSelect={handleCitySelect}
           placeholder="Digite para pesquisar..."
           disabled={false}
           className=""
           maxLength={undefined}
-          options={localities.map((locality) => ({label: locality, value: locality}))}
-          resetButton={() => {}}
+          options={allBrazilianCities.map((locality) => ({ label: locality, value: locality }))}
+          resetButton={() => { }}
           tooltip={false}
           required={false}
           label=""
           icon=""
           modified={false}
         />
+        {/* <input
+          className='rounded rounded-lg border-2 border-white/30 bg-[#0C101D] placeholder:text-sm placeholder:opacity-30 py-1 pl-4 text-sm'
+          type="text"
+          placeholder='Pesquisar local...'
+          onChange={(e) => setSelectedLocality(e.target.value)}
+        /> */}
+
       </div>
       <div className="flex justify-between w-full items-center">
         <div className="flex flex-col">

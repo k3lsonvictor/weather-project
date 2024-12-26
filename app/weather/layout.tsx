@@ -3,9 +3,10 @@ import { PlatformStructure } from "../components/Layout/Structure/PlatformStruct
 import { SideBar } from "../components/Layout/Structure/sideBar";
 
 export default async function PlatformLayout({ children }: { children: any }) {
+
   return (
     <PlatformStructure>
-      <SideBar/>
+      <SideBar />
       <PlatformContent>
         {children}
       </PlatformContent>

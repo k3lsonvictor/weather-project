@@ -50,16 +50,23 @@ export interface WeekWeatherData {
   uvIndex: number;
 }
 
-export function useWeatherData(latitude: number, longitude: number, locality?: string | null) {
+export function useWeatherData(latitude?: number, longitude?: number, locality?: string | null) {
+
+  const [lastTemperature, setLastTemperature] = useState<TemperatureData>({ temperature: '', time: '', weatherCode: null });
+  const [temperatureAlongDay, setTemperatureAlongDay] = useState<{ value: {temperature: number, weatherCode: number | null}, label: string }[]>([]);
+  const [weekWeather, setWeekWeather] = useState<WeekWeatherData[]>([]);
+  const [timezone, setTimezone] = useState<string | null>('');
   const now = new Date();
   const currentDate = now.toISOString().split('T')[0]; // Data atual no formato YYYY-MM-DD
   const endDate = new Date();
   endDate.setDate(now.getDate() + 7);
   const endDateString = endDate.toISOString().split('T')[0];
 
+  console.log(latitude, longitude, locality);
+
   const params = {
-    latitude,
-    longitude,
+    latitude: latitude ? latitude : -23.533773,
+    longitude: longitude ? longitude : -46.62529,
     hourly: ['temperature_2m', 'weather_code'],
     daily: [
       'weather_code',
@@ -80,91 +87,84 @@ export function useWeatherData(latitude: number, longitude: number, locality?: s
     end_date: endDateString,
   };
 
-  // Usando React Query para buscar os dados
-  const { data, isLoading, isError, refetch } = useQuery<any, Error>(
-    ['weatherData', latitude, longitude],
-    () => getWeather(params),
-    {
-      staleTime: 1000 * 60 * 60, // Dados frescos por 1 hora
-      cacheTime: 1000 * 60 * 60 * 24, // Cache por 24 horas
-      refetchOnWindowFocus: false, // Evita refetch quando a janela recebe foco
-      refetchOnReconnect: false, // Evita refetch quando a conexão for restabelecida
-    }
-  );
-
   useEffect(() => {
-    refetch();
-  }, [latitude, longitude, locality, refetch]);
+    const fetchTemperatureData = async () => {
+      try {
+        const response = await getWeather(params);
+        if (!response) {
+          console.log('Sem dados disponíveis');
+          return;
+        }
 
-  // Estado derivado dos dados
-  const [lastTemperature, setLastTemperature] = useState<TemperatureData>({ temperature: '', time: '', weatherCode: null });
-  const [temperatureAlongDay, setTemperatureAlongDay] = useState<{ value: { temperature: number; weatherCode: number | null }; label: string }[]>([]);
-  const [weekWeather, setWeekWeather] = useState<WeekWeatherData[]>([]);
-  const [timezone, setTimezone] = useState<string | null>('');
+        const timezone = response.timezone;
+        setTimezone(timezone ? timezone.replace(/_/g, ' ') : '');
 
-  useEffect(() => {
-    if (data) {
-      const { timezone, hourly, daily } = data;
+        const first24Hours = (data: Hourly[]) => {
+          return data.slice(0, 24);
+        };
 
-      setTimezone(timezone.replace(/_/g, ' '));
+        const currentWeather = first24Hours(response.hourly);
 
-      // Função para filtrar as primeiras 24 horas
-      const first24Hours = (data: Hourly[]) => data.slice(0, 24);
-      const currentWeather = first24Hours(hourly);
+        function filterByCurrentDateTime(data: Hourly[]): Hourly[] {
+          const now = new Date();
+          const currentDate = now.toISOString().split('T')[0];
+          const currentHour = now.getUTCHours();
 
-      // Filtrando pela data e hora atuais
-      function filterByCurrentDateTime(data: Hourly[]): Hourly[] {
-        const now = new Date();
-        const currentDate = now.toISOString().split('T')[0];
-        const currentHour = now.getUTCHours();
+          return data.filter((item) => {
+            const itemDate = new Date(item.timestamp).toISOString().split('T')[0];
+            const itemHour = new Date(item.timestamp).getUTCHours();
+            return itemDate === currentDate && itemHour === currentHour;
+          });
+        }
 
-        return data.filter((item) => {
-          const itemDate = new Date(item.timestamp).toISOString().split('T')[0];
-          const itemHour = new Date(item.timestamp).getUTCHours();
-          return itemDate === currentDate && itemHour === currentHour;
+        const currentTemperature = filterByCurrentDateTime(currentWeather);
+        const date = new Date(currentTemperature[0].timestamp);
+
+        console.log(currentTemperature)
+
+        setLastTemperature({
+          temperature: currentTemperature[0].temperature.toFixed(0).toString(),
+          time: date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }) + ` ${date.getHours()}h`,
+          weatherCode: response.daily[0].weatherCode,
         });
+
+        setTemperatureAlongDay(
+          currentWeather.map((item) => {
+            const date = new Date(item.timestamp);
+            return { value: {temperature: item.temperature, weatherCode: item.weatherCode}, label: date.getHours() + 'h' };
+          })
+        );
+
+        const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+        const todayIndex = new Date().getDay();
+
+        setWeekWeather(
+          response.daily.map((item: any, index: number) => {
+            const dayName = index === 0 ? 'Hoje' : daysOfWeek[(todayIndex + index) % 7];
+            return {
+              weatherCode: item.weatherCode,
+              maxTemp: item.maxTemperature,
+              minTemp: item.minTemperature,
+              daylightDuration: item.daylightDuration,
+              sunshineDuration: item.sunshineDuration,
+              precipitationSum: item.precipitationSum,
+              rainSum: item.rainSum,
+              showersSum: item.showersSum,
+              dayName,
+              windSpeed: item.windSpeed,
+              windDirection: item.windDirection,
+              uvIndex: item.uvIndex,
+            };
+          })
+        );
+      } catch (error: unknown) {
+        console.log('Erro ao buscar dados');
+        console.error(error);
       }
+    };
 
-      const currentTemperature = filterByCurrentDateTime(currentWeather);
-      const date = new Date(currentTemperature[0].timestamp);
+    fetchTemperatureData();
+  }, []);
 
-      setLastTemperature({
-        temperature: currentTemperature[0].temperature.toFixed(0).toString(),
-        time: date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }) + ` ${date.getHours()}h`,
-        weatherCode: daily[0].weatherCode,
-      });
-
-      setTemperatureAlongDay(
-        currentWeather.map((item) => {
-          const date = new Date(item.timestamp);
-          return { value: { temperature: item.temperature, weatherCode: item.weatherCode }, label: date.getHours() + 'h' };
-        })
-      );
-
-      const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-      const todayIndex = new Date().getDay();
-
-      setWeekWeather(
-        daily.map((item: any, index: number) => {
-          const dayName = index === 0 ? 'Hoje' : daysOfWeek[(todayIndex + index) % 7];
-          return {
-            weatherCode: item.weatherCode,
-            maxTemp: item.maxTemperature,
-            minTemp: item.minTemperature,
-            daylightDuration: item.daylightDuration,
-            sunshineDuration: item.sunshineDuration,
-            precipitationSum: item.precipitationSum,
-            rainSum: item.rainSum,
-            showersSum: item.showersSum,
-            dayName,
-            windSpeed: item.windSpeed,
-            windDirection: item.windDirection,
-            uvIndex: item.uvIndex,
-          };
-        })
-      );
-    }
-  }, [data]);
-
-  return { lastTemperature, temperatureAlongDay, weekWeather, timezone, isLoading, isError };
+  return { lastTemperature, temperatureAlongDay, weekWeather, timezone };
 }

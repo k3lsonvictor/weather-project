@@ -12,7 +12,7 @@ export async function request<T>(
   params?: unknown,
   contentType?: string,
   showRawError?: boolean
-): Promise<ApiResponse<T> | undefined | unknown> {
+): Promise<ApiResponse<T> | undefined | any> {
   try {
     const config: AxiosRequestConfig = {
       url: url,
