@@ -5,7 +5,7 @@ import { LastTemperatureCardNew } from "../components/LastTemperatureCard/lastTe
 import { WeekWeather } from "../components/WeekWeather/weekWeather";
 
 export default function Home() {
-  const { lastTemperature, temperatureAlongDay, weekWeather, timezone } = useWeatherData(52.52, 13.41);
+  const { lastTemperature, temperatureAlongDay, weekWeather, timezone } = useWeatherData(0 , 0);
 
   console.log(weekWeather[0]?.windSpeed,
     weekWeather[0]?.windDirection,

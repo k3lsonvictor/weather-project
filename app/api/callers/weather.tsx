@@ -17,7 +17,10 @@ export interface WeatherResponse {
 
 export const getWeather = async (params: WeatherRequest) => {
   const responses = await fetchWeatherApi("https://api.open-meteo.com/v1/forecast", params);
-  if (!responses) return;
+  if (!responses) {
+    throw new Error("No response from weather API");
+    return;
+  };
 
   const response = responses[0];
   const utcOffsetSeconds = response.utcOffsetSeconds();

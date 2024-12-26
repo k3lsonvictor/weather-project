@@ -1,8 +1,8 @@
 import { useState } from "react";
 import VerticalLineChart from "../Layout/Charts/VerticalChart"
-import { ToggleSwitch } from "../Layout/toggleSwitch"
+import { ToggleSwitch } from "../Layout/Buttons/toggleSwitch"
 import weatherCodes from "../../utils/codesWeather.json"
-import { SimpleCard } from '../SimpleCard/simplesCard';
+import { SimpleCard } from '../Layout/Cards/SimpleCard/simplesCard';
 
 interface TemperatureData {
   temperatureAlongDay: { value: { temperature: number, weatherCode: number | null }, label: string }[];

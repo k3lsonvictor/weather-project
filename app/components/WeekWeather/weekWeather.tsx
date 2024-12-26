@@ -12,7 +12,7 @@ export const WeekWeather = ({
   return (
     <div className="bg-[#0C101D] flex-1 rounded rounded-2xl w-auto h-full font-oswald font-semibold flex flex-col justify-start items-start p-12 gap-12">
       <div>Previsão da semana</div>
-      <div className="flex flex-col justify-between items-between gap-6 w-full h-full">
+      <div className="flex flex-col justify-between items-between gap-6 h-full">
         {weekWeather.map((dayWeather, index) => (
           <DailyCard key={index} {...dayWeather} />
         ))}
