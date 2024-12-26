@@ -13,7 +13,7 @@ export const SideBar = () => {
 
   console.log(path)
   return (
-    <div className="flex flex-col items-center w-[150px] h-screen py-8">
+    <div className="hidden min-[730px]:flex min-[730px]:flex-col items-center w-[150px] h-screen py-8">
       <div className='flex flex-col items-center bg-[#0C101D] h-full px-6 pt-8 pb-6 rounded rounded-2xl ml-4'>
         <div className='flex '>
           <Image

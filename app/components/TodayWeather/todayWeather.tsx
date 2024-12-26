@@ -26,7 +26,7 @@ export const TodayWeather = ({ temperatureAlongDay, weatherInfoDay }: Temperatur
   console.log(filteredTemperatureAlongDay);
   const [isSimplified, setIsSimplified] = useState(false);
   return (
-    <div className="relative lg:flex flex-1 flex-col items-center w-full h-auto md:h-full gap-2 p-6 bg-[#0C101D] rounded rounded-2xl overflow-hidden font-oswald font-semibold">
+    <div className="relative lg:flex flex-1 flex-col items-center w-full h-auto mix-730[px]:h-full gap-2 p-6 bg-[#0C101D] rounded rounded-2xl overflow-hidden font-oswald font-semibold">
       <div className="flex mb-8 md:mb-4 lg:mb-8">Previsão para hoje</div>
       {isSimplified === false && <div className="flex w-full h-full overflow-hidden gap-4">
         <div className="flex-grow w-[100%] md:w-[70%] md:max-w-[80%] h-[80%] md:h-[90%] pr-4">
