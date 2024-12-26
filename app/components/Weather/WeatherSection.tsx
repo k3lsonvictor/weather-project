@@ -21,7 +21,7 @@ export function WeatherSection() {
 
   return (
     <div className="flex flex-col md:grid md:grid-cols-[1fr_auto] h-full items-start p-8 gap-4 font-[family-name:var(--font-geist-sans)]">
-      <div className="flex flex-col gap-4 w-full h-full">
+      <div className="flex flex-col gap-4 w-full h-auto md:h-full">
         <LastTemperatureCardNew
           setLocality={(e) => {
             setSelectedLocality(e);

@@ -26,10 +26,10 @@ export const TodayWeather = ({ temperatureAlongDay, weatherInfoDay }: Temperatur
   console.log(filteredTemperatureAlongDay);
   const [isSimplified, setIsSimplified] = useState(false);
   return (
-    <div className="hidden relative lg:flex flex-1 flex-col items-center w-full h-full gap-2 p-6 bg-[#0C101D] rounded rounded-2xl overflow-hidden font-oswald font-semibold">
+    <div className="relative lg:flex flex-1 flex-col items-center w-full h-auto md:h-full gap-2 p-6 bg-[#0C101D] rounded rounded-2xl overflow-hidden font-oswald font-semibold">
       <div className="flex mb-8 md:mb-4 lg:mb-8">Previsão para hoje</div>
       {isSimplified === false && <div className="flex w-full h-full overflow-hidden gap-4">
-        <div className="flex-grow w-[70%] max-w-[80%] h-[90%] pr-4">
+        <div className="flex-grow w-[100%] md:w-[70%] md:max-w-[80%] h-[80%] md:h-[90%] pr-4">
           <div className="flex w-full h-full">
             <VerticalLineChart
               data={[
@@ -38,7 +38,7 @@ export const TodayWeather = ({ temperatureAlongDay, weatherInfoDay }: Temperatur
             />
           </div>
         </div>
-        <div className="flex-shrink-0 flex flex-col justify-start w-auto items-start gap-4 md:gap-2 lg:gap-4">
+        <div className="hidden md:flex md:flex-shrink-0 flex flex-col justify-start w-auto items-start gap-4 md:gap-2 lg:gap-4">
           <SimpleCard
             icon="thermometer"
             description="Temperatura máxima"
@@ -75,7 +75,7 @@ export const TodayWeather = ({ temperatureAlongDay, weatherInfoDay }: Temperatur
 
         </div>
       </div>}
-      <div className="flex absolute top-6 right-[12px] gap-4">
+      <div className="hidden md:flex absolute top-6 right-[12px] gap-4">
         <div className="font-light">Resumo</div>
         <ToggleSwitch
           onClick={() => setIsSimplified(!isSimplified)}

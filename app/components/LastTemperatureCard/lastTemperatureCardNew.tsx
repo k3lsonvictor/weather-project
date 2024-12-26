@@ -61,13 +61,6 @@ export const LastTemperatureCardNew = ({setLocality, lastTemperature, timezone}:
           icon=""
           modified={false}
         />
-        {/* <input
-          className='rounded rounded-lg border-2 border-white/30 bg-[#0C101D] placeholder:text-sm placeholder:opacity-30 py-1 pl-4 text-sm'
-          type="text"
-          placeholder='Pesquisar local...'
-          onChange={(e) => setSelectedLocality(e.target.value)}
-        /> */}
-
       </div>
       <div className="flex justify-between w-full items-center">
         <div className="flex flex-col">
