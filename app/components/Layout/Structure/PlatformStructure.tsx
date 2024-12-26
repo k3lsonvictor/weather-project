@@ -1,17 +1,24 @@
 "use client";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider, QueryCache } from 'react-query';
 import { persistQueryClient } from 'react-query/persistQueryClient-experimental';
 import { createWebStoragePersistor } from 'react-query/createWebStoragePersistor-experimental';
 
 export const PlatformStructure = ({ children }: { children: any }) => {
   const queryClient = new QueryClient();
-  const localStoragePersistor = createWebStoragePersistor({ storage: window.localStorage });
+  
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const localStoragePersistor = createWebStoragePersistor({
+        storage: window.localStorage,
+      });
 
-  persistQueryClient({
-    queryClient,
-    persistor: localStoragePersistor,
-  });
+      persistQueryClient({
+        queryClient,
+        persistor: localStoragePersistor,
+      });
+    }
+  }, [queryClient]);
   
   return (
     <QueryClientProvider client={queryClient}>
