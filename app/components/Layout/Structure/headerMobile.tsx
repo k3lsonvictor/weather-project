@@ -11,7 +11,7 @@ export const HeaderMobile = () => {
   const router = useRouter();
 
   return (
-    <div className="hidden max-[730px]:flex flex-row justify-between items-center px-4 pt-4 bg-bren-blue-100 w-full">
+    <div className="hidden max-[730px]:flex flex-row justify-between items-center px-4 pt-4 bg-bren-blue-100 w-full text-white">
       <div className="flex flex-row items-center justify-between w-full bg-[#0C101D] h-full px-12 pt-8 pb-6 rounded rounded-2xl mx-4">
         <div className='flex'>
           <Image
