@@ -51,7 +51,7 @@ export const LastTemperatureCardNew = ({setLocality, lastTemperature, timezone}:
           onSelect={handleCitySelect}
           placeholder="Digite para pesquisar..."
           disabled={false}
-          className=""
+          className="text-black"
           maxLength={undefined}
           options={allBrazilianCities.map((locality) => ({ label: locality, value: locality }))}
           resetButton={() => { }}
