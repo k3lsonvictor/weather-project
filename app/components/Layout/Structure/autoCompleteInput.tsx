@@ -49,7 +49,7 @@ export const AutoCompleteInputField = ({ value, modified, label, info, icon, req
     </div>
 
 
-    <div className={`px-3 py-[2px] [&>*]:text-[14px] rounded-xl flex [&>*]:outline-none bg-white border border-cloudy-blue dark:border-medium-grey [&>*]:bg-white dark:bg-black/25 [&>*]:dark:bg-transparent relative  ${disabled ? "opacity-50 !bg-cloudy-blue/25 dark:!bg-transparent [&>*]:!bg-transparent cursor-not-allowed" : ""} ${preValue !== "" ? "!rounded-b -none" : "inherit"}`}>
+    <div className={`px-3 py-[2px] [&>*]:text-[14px] rounded-xl flex [&>*]:outline-none bg-white border border-cloudy-blue dark:border-medium-grey bg-white  relative`}>
       <div className="w-full relative [&>*]:outline-none">
         {value !== "" && (
           <div
