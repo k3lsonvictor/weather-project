@@ -3,6 +3,8 @@ import VerticalLineChart from "../Layout/Charts/VerticalChart"
 import { ToggleSwitch } from "../Layout/Buttons/toggleSwitch"
 import weatherCodes from "../../utils/codesWeather.json"
 import { SimpleCard } from '../Layout/Cards/SimpleCard/simplesCard';
+import useWeatherReducer from "../Layout/Structure/generalReducer";
+import { SkeletonLoading, SkeletonLoadingCards, SkeletonLoadingSquares, SkeletonLoadingTextBlocks } from '../Layout/Loadings/skeletonLoading';
 
 interface TemperatureData {
   temperatureAlongDay: { value: { temperature: number, weatherCode: number | null }, label: string }[];
@@ -10,6 +12,7 @@ interface TemperatureData {
 }
 
 export const TodayWeather = ({ temperatureAlongDay, weatherInfoDay }: TemperatureData) => {
+  const { loadingState } = useWeatherReducer();
   const filterTemperatureData = (data: { value: { temperature: number, weatherCode: number | null }, label: string }[]) => {
     const filteredData = [];
     const interval = Math.floor(data.length / 6);
@@ -31,11 +34,21 @@ export const TodayWeather = ({ temperatureAlongDay, weatherInfoDay }: Temperatur
       {isSimplified === false && <div className="flex w-full h-full overflow-hidden gap-4">
         <div className="flex-grow w-[100%] md:w-[70%] md:max-w-[80%] h-[80%] md:h-[90%] pr-4">
           <div className="flex w-full h-full">
-            <VerticalLineChart
+            {loadingState === 1 ? <VerticalLineChart
               data={[
                 { data: temperatureAlongDay.map(item => ({ label: item.label, value: item.value.temperature.toFixed(2) })) },
               ]}
             />
+              :
+              <div className="flex w-full h-[80%] md:h-[90%] opacity-50">
+                <div className="animate-pulse relative w-full h-full flex bg-white mb-2  px-6 py-6 border border-white border-transparent bg-grey/25 rounded-xl items-center flex-col lg:flex-row  ">
+                  <div className="lg:mr-10 w-full h-full flex items-center  lg:mb-0  ">
+                    <div>
+                      <div className="h-full w-full rounded-full bg-white bg-medium-grey mr-4 mt-3"></div>
+                    </div>
+                  </div>
+                </div></div>
+            }
           </div>
         </div>
         <div className="hidden md:flex md:flex-shrink-0 flex flex-col justify-start w-auto items-start gap-4 md:gap-2 lg:gap-4">

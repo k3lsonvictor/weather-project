@@ -51,10 +51,10 @@ export interface WeatherResultProps extends WeatherStateProps {
 }
 
 export enum WeatherLoadingState {
-  FIRST_LOAD,
-  IDLE,
-  FETCHING,
-  REFETCHING,
+  FIRST_LOAD, // Primeiro carregamento
+  IDLE, // Sem carregamento
+  FETCHING, // Carregando
+  REFETCHING, // Recarregando
 }
 
 export enum WeatherActionTypes {

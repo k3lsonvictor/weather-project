@@ -5,11 +5,6 @@ import codesWeather from '../../utils/codesWeather.json';
 export const DailyCard = ({
   maxTemp,
   minTemp,
-  daylightDuration,
-  sunshineDuration,
-  precipitationSum,
-  rainSum,
-  showersSum,
   dayName,
   weatherCode
 }
