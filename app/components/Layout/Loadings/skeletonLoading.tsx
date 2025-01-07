@@ -39,7 +39,7 @@ export const SkeletonLoading = ({
               </div>
             </div>
           </div>
-        ) :(
+        ) : (
           <div className="animate-pulse relative w-full flex bg-white mb-2  px-6 py-6 border border-white border-transparent bg-grey/25 rounded-xl items-center flex-col lg:flex-row  ">
             <div className="lg:mr-10 w-full lg:w-[250px] flex items-center  lg:mb-0  ">
             </div>
@@ -201,12 +201,12 @@ export const SkeletonLoadingTextBlocks = ({
   number: number;
   height?: string;
 }) => {
-  const Skeleton = ({ opacity, width }: { opacity: string, width:string }) => {
+  const Skeleton = ({ opacity, width }: { opacity: string, width: string }) => {
     return (
       <div style={{ opacity, width }} className="inline">
-                 <div className={`animate-pulse relative w-full inline-flex bg-white px-5 py-5 border border-white border-transparent bg-grey/25 rounded-3xl items-start flex-col lg:flex-row mb-2 ${height}`}
-          >
-          </div>
+        <div className={`animate-pulse relative w-full inline-flex bg-black opacity-40 px-5 py-5 border border-white border-transparent bg-grey/25 rounded-3xl items-start flex-col lg:flex-row mb-2 ${height}`}
+        >
+        </div>
       </div>
     );
   };
