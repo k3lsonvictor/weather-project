@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { GetEnvValue } from "./env";
 
 export interface ApiResponse<T> {
   data: T;
@@ -13,6 +14,9 @@ export async function request<T>(
   contentType?: string,
   showRawError?: boolean
 ): Promise<ApiResponse<T> | undefined | any> {
+
+  const BASE_URL = await GetEnvValue("NEXT_PUBLIC_API_URL");
+
   try {
     const config: AxiosRequestConfig = {
       url: url,
