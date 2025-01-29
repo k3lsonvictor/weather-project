@@ -25,6 +25,7 @@ export async function request<T>(
       params,
       headers: {
         "Content-Type": contentType || "application/json",
+        "Access-Control-Allow-Origin": "*", // Adiciona o cabeçalho CORS
       }
     };
     const response: AxiosResponse<T> = await axios(config);
