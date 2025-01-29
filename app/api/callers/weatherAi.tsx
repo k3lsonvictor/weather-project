@@ -1,5 +1,5 @@
 import { request } from "@/app/api/apiRequester";
 
 export const getLeisureRecommendations = async (values: string) => {
-  return request(`http://localhost:3000/generate`, 'POST', { prompt: values });
+  return request(`https://minha-app-node-634861991701.us-central1.run.app/generate`, 'POST', { prompt: values });
 };
